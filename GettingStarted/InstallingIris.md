@@ -26,7 +26,9 @@ require (
 )
 ```
 
-`go bulid`
+```shell
+go build
+```
 
 ## TroubleShooting
 
