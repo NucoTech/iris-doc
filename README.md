@@ -16,5 +16,6 @@ Iris框架Wiki翻译文档
 ## Contributors
 
 - [Herbert He](https://github.com/HerbertHe)
+- [hanzhang2](https://github.com/hanzhang2)
 
 ## License
