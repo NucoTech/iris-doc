@@ -120,7 +120,7 @@ versioning.RegisterGroups(userAPI, versioning.NotFoundHandler, userAPIV10, userA
 
 ### 组弃用(Deprecation for Group)
 
-只需要对想要弃用的组使用 `Deprecated(versioning.DeprecationOptions)` , 来通知API使用者这个特定的版本已经被弃用
+只需要对想要弃用的组调用 `Deprecated(versioning.DeprecationOptions)` , 来通知API使用者这个特定的版本已经被弃用
 
 ```go
 userAPIV10 := versioning.NewGroup("1.0").Deprecated(versioning.DefaultDeprecationOptions)
