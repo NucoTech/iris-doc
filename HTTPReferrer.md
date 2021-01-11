@@ -6,7 +6,7 @@ Referrer-Policy HTTP消息头控制请求中应该包含多少referrer信息(通
 
 Iris使用[Shopify's goreferrer](https://github.com/Shopify/goreferrer/pull/27)包来显示 `Context.GetReferrer()` 方法
 
-`GetReferrer` 方法从[链接](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)的 `Referer` (或 `Referrer`)消息头和URL查询参数中提取并返回信息
+`GetReferrer` 方法从[链接](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)的 `Referer` (或 `Referrer`)消息头和url query参数中提取并返回信息
 
 ```go
 GetReferrer() Referrer
