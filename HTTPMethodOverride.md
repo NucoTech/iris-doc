@@ -1,13 +1,12 @@
 # HTTP Method Override
 
-在开发和升级RAST API时, 使用特定的自定义HTTP头(如X-HTTP method override)非常的方便, 在部署基于RAST API的web服务时, 您可能会遇到服务器端和客户端的访问限制.
-有些防火墙会拦截PUT, DELETE或者PATCH请求.
+在开发和升级REST API时, 使用特定的自定义HTTP请求头(如X-HTTP方法覆盖)非常的方便, 在部署基于REST API的web服务时, 您可能会需要**服务端**和**客户端**侧的访问限制
 
----
+有些防火墙会不支持PUT, DELETE或者PATCH请求
 
-HTTP Method Override允许您在客户端不支持的地方使用HTTP参数, 如PUT, DELETE.
+[Method Override](https://github.com/kataras/iris/tree/master/middleware/methodoverride)允许您在客户端不支持的地方使用HTTP请求方法, 如PUT, DELETE
 
-服务端(Server)
+## 服务端(Server)
 
 ```go
 package main
@@ -20,10 +19,10 @@ import (
 func main() {
     app := iris.New() 
 
-    mo := MethodOverride.New( 
+    mo := methodoverride.New( 
         // 默认为nil. 
         // 
-        MethodOverride.SaveOriginalMethod("_originalMethod"), 
+        methodoverride.SaveOriginalMethod("_originalMethod"), 
         // 默认值. 
         // 
         // methodoverride.Methods(http.MethodPost), 
@@ -48,7 +47,7 @@ func main() {
 }
 ```
 
-客户端(Client)
+## 客户端(Client)
 
 ```go
 fetch("/path", {
@@ -58,6 +57,6 @@ fetch("/path", {
     },
   })
   .then((resp)=>{
-      // response body will be "delete response". 
+      // 响应体(response body)会被置为"delete response". 
  })).catch((err)=> { console.error(err) })
 ```
