@@ -58,3 +58,7 @@ Iris框架Wiki翻译文档
 - [keylxiao](https://github.com/keylxiao)
 
 ## License
+
+&copy; 2021 ~ 本仓库内容遵循[署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)协议
+
+![CC BY-NC-SA](https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png)
