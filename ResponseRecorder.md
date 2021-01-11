@@ -33,7 +33,7 @@ SetBody(b []byte)
 SetBodyString(s string)
 ```
 
-在调用 `Context.Record`方法之前, 将信息头充值到初始状态
+在调用 `Context.Record`方法之前, 将信息头重置到初始状态
 
 ```go
 ResetHeaders()
