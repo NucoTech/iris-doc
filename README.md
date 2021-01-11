@@ -32,6 +32,8 @@ Iris框架Wiki翻译文档
 - [ ] [表单](/Forms.md)
 - [ ] [Model验证](/ModelValidation.md)
 - [ ] [Cache](/Cache.md)
+- [ ] [视图层(View)](/View.md)
+- [ ] [Cookies](/Cookies.md)
 - [ ] [会话(Sessions)](/Sessions/README.md)
   - [数据库](/Sessions/Database.md)
   - [Flash Messages](/Sessions/Messages.md)
