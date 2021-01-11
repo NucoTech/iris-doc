@@ -2,9 +2,9 @@
 
 Referrer-Policy HTTP消息头控制请求中应该包含多少referrer信息(通过referrer消息头发送)
 
-在[developer.mozilla.org](developer.mozilla.org)中阅读更多
+在[developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)中阅读更多
 
-Iris使用[Shopify's goreferrer](https://github.com/Shopify/goreferrer/pull/27)包来显示 `Context.GetReferrer()` 方法
+Iris使用[Shopify's goreferrer](https://github.com/Shopify/goreferrer/pull/27)包来暴露 `Context.GetReferrer()` 方法
 
 `GetReferrer` 方法从[链接](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)的 `Referer` (或 `Referrer`)消息头和url query参数中提取并返回信息
 
@@ -29,7 +29,7 @@ type (
     }
 ```
 
-`ReferrerType` 是Referrer的枚举, 类型值(直接, 间接, 电子邮件, 搜索, 社交媒体), 可获得的类型为:
+`ReferrerType` 是Referrer的枚举,Type value(直接, 间接, 电子邮件, 搜索, 社交媒体), 可获得的类型为:
 
 ```go
 ReferrerInvalid
@@ -75,7 +75,7 @@ func main() {
 }
 ```
 
-怎样 `crul`:
+怎样 `curl`:
 
 ```shell
 curl http://localhost:8080?\

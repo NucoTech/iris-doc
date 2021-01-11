@@ -26,9 +26,9 @@ Iris框架Wiki翻译文档
 - [x] [API版本化](/APIVersioning.md)
 - [x] [内容协商](/ContentNegotiation.md)
 - [x] [响应记录器](/ResponseRecorder.md)
-- [ ] [HTTP引用](/HTTPReferrer.md)
-- [ ] [请求认证](/RequestAuthentication.md)
-- [ ] [URL Query参数](/URLQueryParameters.md)
+- [x] [HTTP引用](/HTTPReferrer.md)
+- [x] [请求认证](/RequestAuthentication.md)
+- [x] [URL Query参数](/URLQueryParameters.md)
 
 ## Contributors
 

@@ -1,9 +1,9 @@
 # 响应记录器(Response recorder)
 
-响应记录器是一个Iris中记录发送体, 状态码和消息头的特定的 `http.ResponseWriter` , 您可以在路由的请求处理程序链的任何处理程序中操作
+响应记录器是一个Iris中记录发送体、状态码和消息头的特定的 `http.ResponseWriter` , 您可以在路由的请求处理程序链的任何处理程序中操作
 
-1.在发送数据之前调用 `Context.Record()`
-2.`Context.Record()`返回一个[响应记录器](https://godoc.org/github.com/kataras/iris/context#ResponseRecorder),  该方法可用于操作或者检索响应
+1. 在发送数据之前调用 `Context.Record()`
+2. `Context.Record()`返回一个[响应记录器](https://godoc.org/github.com/kataras/iris/context#ResponseRecorder),  该方法可用于操作或者检索响应
 
 `ResponseRecorder` 类型包含标准的Iris响应写入器(ResponseWriter)方法及以下方法
 
@@ -45,7 +45,7 @@ ResetHeaders()
 ClearHeaders()
 ```
 
-Reset方法重置响应体, 消息头和状态码
+Reset方法重置响应体、消息头和状态码
 
 ```go
 Reset()

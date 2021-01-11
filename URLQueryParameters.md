@@ -41,11 +41,11 @@ URLParamBool(name string) (bool, error)
 URLParams() map[string]string
 ```
 
-query字符串参数使用现有的底层请求对象进行解析, 以 */welcome?firstname=Jane&lastname=Doe*为例:
+query字符串参数使用现有的底层请求对象进行解析, 请求响应url匹配类似: */welcome?firstname=Jane&lastname=Doe*:
 
 - `ctx.URLParam("lastname") == ctx.Request().URL.Query().Get("lastname")`
 
-代码例:
+代码示例:
 
 ```go
 app.Get("/welcome", func(ctx iris.Context) {
