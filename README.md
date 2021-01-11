@@ -10,8 +10,8 @@ Iris框架Wiki翻译文档
 - [ ] Getting Started
   - [下载Iris](/GettingStarted/InstallingIris.md)
   - [快速上手](/GettingStarted/QuickStart.md)
-- [ ] [Host](/Host/README.md)
-  - [使用TLS的公共域名](/Host/AutomaticPublicDomainWithTLS.md)
+- [x] [Host](/Host/README.md)
+  - [自动TLS的公共域名](/Host/AutomaticPublicDomainWithTLS.md)
 
 ## Contributors
 
