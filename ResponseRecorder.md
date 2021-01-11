@@ -1,11 +1,11 @@
 # 响应记录器(Response recorder)
 
-响应记录器是一个iris中记录发送体, 状态码和消息头的特定的 `http.ResponseWriter` , 您可以在路由的请求处理程序链的任何处理程序中操作
+响应记录器是一个Iris中记录发送体, 状态码和消息头的特定的 `http.ResponseWriter` , 您可以在路由的请求处理程序链的任何处理程序中操作
 
 1.在发送数据之前调用 `Context.Record()`
 2.`Context.Record()`返回一个[响应记录器](https://godoc.org/github.com/kataras/iris/context#ResponseRecorder),  该方法可用于操作或者检索响应
 
-`ResponseRecorder` 类型包含标准的iris响应写入器(ResponseWriter)方法及以下方法
+`ResponseRecorder` 类型包含标准的Iris响应写入器(ResponseWriter)方法及以下方法
 
 Body**返回**到目前为止追踪到的Body,不要使用它进行编辑
 
@@ -88,7 +88,7 @@ app.Get("/save", func(ctx iris.Context) {
 })
 ```
 
-或者在主要信息头中消除依赖 `ctx.Next`, 可以如下修改iris的处理程序的执行规则
+或者在主要信息头中消除依赖 `ctx.Next`, 可以如下修改Iris的处理程序的执行规则
 
 ```go
 // 它适用于任何一个Party或者children
@@ -104,4 +104,4 @@ app.Get("/save", func(ctx iris.Context) {
 })
 ```
 
-除此之外, iris为事务提供了一个全面的API, 运行[实例](https://github.com/kataras/iris/blob/master/_examples/response-writer/transactions/main.go)来了解更多
+除此之外, Iris为事务提供了一个全面的API, 运行[实例](https://github.com/kataras/iris/blob/master/_examples/response-writer/transactions/main.go)来了解更多
