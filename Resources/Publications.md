@@ -1,6 +1,6 @@
 # 出版物
 
-准备一杯咖啡或者茶, 无论是否能让你兴奋, 阅读一些我们为你寻找的文章吧!
+准备一杯咖啡或者茶, 无论是否能让你兴奋, 来阅读一些我们为你寻找的文章吧!
 
 - [Go语言: MongoDB, Iris API](https://bit.ly/2TTtbYx)
 - [学习Iris和Go(印度尼西亚语)](https://techmaster.vn/posts?author=8229)
