@@ -1,8 +1,8 @@
 # 缓存
 
-有时, 提供静态内容的缓存路由很重要, 它可以使web应用执行得更快, 不必花时间为客户端重新构建响应
+有时, 提供静态内容的缓存路由很重要, 它可以使web应用表现得更快, 不必花时间为客户端重新构建响应
 
-有两种方法可以实现HTTP缓存, 一种是在服务端存储每个处理程序的内容, 另一种是通过检查一些消息头并发送 `304 not modified` , 以便让浏览器或任何兼容的客户端自己处理缓存
+有两种方法可以实现HTTP缓存, 一种是在服务端存储每个处理程序的内容, 另一种是通过检查一些消息头信息并发送 `304 not modified` , 以便让浏览器或任何兼容的客户端自己处理缓存
 
 Iris的 [Iris/cache](https://github.com/kataras/iris/tree/master/cache) 子包中的 `iris.Cache` 和 `iris.Cache304` 中间件提供了服务端和客户端的缓存
 
@@ -10,7 +10,7 @@ Iris的 [Iris/cache](https://github.com/kataras/iris/tree/master/cache) 子包�
 
 ## Cache
 
-`Cache` 是为下一个的处理程序提供服务端的缓存的中间件, 可这样调用: `app.Get("/", iris.Cache, aboutHandler)`
+`Cache` 是为下一个的处理程序提供服务端缓存的中间件, 可这样使用: `app.Get("/", iris.Cache, aboutHandler)`
 
 `Cache` 只接收一个参数: cache的过期时间, 如果过期值是一个无效值或<= 2s, 那么过期事件将会被 "cache-control's maxage" 消息头执行
 
@@ -34,7 +34,7 @@ func Cache(expiration time.Duration) Handler
 func NoCache(Context)
 ```
 
-相反的行为请看 `StaticCache`
+相反的行为请看 `静态缓存(StaticCache)`
 
 ## StaticCache
 

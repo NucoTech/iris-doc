@@ -1,14 +1,14 @@
 # 视图层(View)
 
-Iris通用的[视图引擎](https://godoc.org/github.com/kataras/iris/view#Engine)提供了6个即用的模型解析器, 当然, 开发人员依然可以使用各种go模板解析器作为 `Context.ResponseWriter()` 来完成 `http.ResponseWriter` 和 `io.Writer`
+Iris通用的[视图引擎](https://godoc.org/github.com/kataras/iris/view#Engine)提供了6个即用的模型解析器。 当然, 开发人员依然可以使用各种go模板解析器作为 `Context.ResponseWriter()` 来完成 `http.ResponseWriter` 和 `io.Writer`
 
-Iris添加了一些通用的规则和特性, 他们原始的解析器并不支持这些, 例如, 我们支持 `yield` , `render` , `render_r` , `current` , `urlpath` 模板功能, 并且 `Layouts` 和 `binding` 跨越引擎所有的中间件和**嵌入式模板文件**
+Iris添加了一些通用的规则和特性, 他们的原生解析器并不支持这些, 例如, 我们支持 `yield` , `render` , `render_r` , `current` , `urlpath` 模板功能, 并且 `Layouts` 和 `binding` 跨越引擎所有的中间件和**嵌入式模板文件**
 
-要使用模板引擎的独特特性, 你必须阅读文档来学习特性和语法(点击下方链接), 选择您的程序所需要的
+要使用模板引擎的独特特性, 你需要阅读文档来学习特性和语法(点击下方链接), 选择您的程序所需要的
 
 以下是已经内置的视图引擎列表
 
-| 引擎 | 声明 | 重点模板解析器 |
+| 引擎 | 声明 | 标注模板解析器 |
 | --- | --- | --- |
 | std template/html | `iris.HTML(...)` | [html/template](https://golang.org/pkg/html/template/) package |
 | django | `iris.Django(...)` | [iris-contrib/pongo2](https://github.com/iris-contrib/pongo2) package |

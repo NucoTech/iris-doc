@@ -2,7 +2,7 @@
 
 Iris十分英明的没有内置数据的验证功能, 不过, 它确实允许你附加一个验证器, 它会自动调用 `Context.ReadJSON, ReadXML...` 在这个例子中, 我们将学习如何使用 [go-playground/validator/v10](https://github.com/go-playground/validator) 进行请求体的验证
 
-来这儿检查完整的文档和结构体标志用法=> [点我](https://pkg.go.dev/github.com/go-playground/validator/v10@v10.2.0?tab=doc)
+来[这儿](https://pkg.go.dev/github.com/go-playground/validator/v10@v10.2.0?tab=doc)检查完整的文档和结构体标志用法
 
 ```shell
 go get github.com/go-playground/validator/v10@latest
@@ -136,4 +136,4 @@ JSON格式的请求示例:
 }
 ```
 
-可以在这里找更多的例子=>[链接](https://github.com/kataras/iris/tree/master/_examples/request-body/read-json-struct-validation/main.go)
+可以在[这里](https://github.com/kataras/iris/tree/master/_examples/request-body/read-json-struct-validation/main.go)找更多的例子
