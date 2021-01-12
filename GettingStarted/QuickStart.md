@@ -1,6 +1,6 @@
-# Quick start
+# 快速开始(QuickStart)
 
-新建一个空的文件, 命名为`example.go`, 打开它并将下列代码粘贴进去
+新建一个空的文件, 命名为`example.go`, 打开它并将下列代码粘贴进去。
 
 ```go
 package main
@@ -22,14 +22,14 @@ func myMiddleware(ctx iris.Context) {
 }
 ```
 
-打开一个终端，进入`example.go`所在的目录，粘贴并执行下列代码
+打开一个终端，进入`example.go`所在的目录，粘贴并执行下列代码。
 
-```bash
+```shell
 #运行 example.go 在浏览器访问http://localhost:8080/ping
 go run example.go
 ```
 
-## ShowMeMore
+## 更多内容(ShowMeMore)
 
 用一个简单的概述看一下iris上手有多么的简单
 
@@ -54,16 +54,15 @@ func main() {
     // Method:    GET
     // Resource:  http://localhost:8080/user/42
     //
-    // 需要使用一个自定义的正则表达式解析地址中的参数?
-    // 很容易的;
-    // 只需要将参数的类型标记为 'string'
-    // 这样它就能使用宏定义的正则表达式来接受任意参数, 例如:
-    // app.Get("/user/{id:string regexp(^[0-9]+$)}")
+    // 如何使用一个自定义的正则表达式解析地址中的参数?
+    // 只需要将参数的类型声明为string
+    // 这样它就能使用宏定义的正则表达式来接受任意匹配到的参数, 
+    // 例如: app.Get("/user/{id:string regexp(^[0-9]+$)}")
     app.Get("/user/{id:uint64}", func(ctx iris.Context) {
         userID, _ := ctx.Params().GetUint64("id")
         ctx.Writef("User ID: %d", userID)
     })
-    // Start the server using a network address.
+    // 使用下列地址启动http服务.
     app.Listen(":8080")
 }
 ```
@@ -80,6 +79,6 @@ func main() {
 </html>
 ```
 
-> 想让你的项目在代码修改之后自动重新运行吗?安装[iris-cli](https://github.com/kataras/iris-cli)工具, 使用`iris-cli run`而不是`go run main.go`
+> 想让你的项目在代码修改之后自动重新运行吗? 安装[iris-cli](https://github.com/kataras/iris-cli)工具, 使用`iris-cli run`而不是`go run main.go`
 
-在以下部分我们会了解更多关于`Routing`的内容
+在接下来我们会了解更多关于[`Routing`](https://github.com/kataras/iris/wiki/Routing)的内容
