@@ -43,7 +43,7 @@ Iris框架Wiki翻译文档
 - [ ] [gRPC](/gRCP.md)
 - [ ] [Sitemap](/Sitemap.md)
 - [ ] [国际化](/Localization.md)
-- [ ] [测试](/Testing.md)
+- [x] [测试](/Testing.md)
 - [x] 资源
   - [入门套件](/StarterKit.md)
   - [出版物](/Publications.md)
