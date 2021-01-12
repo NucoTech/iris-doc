@@ -1,6 +1,6 @@
 # 表单(Forms)
 
-表单、发送的数据和上传的文件可以通过以下的方法检索
+表单、发送的数据和上传的文件可以通过上下文中的方法检索
 
 ```go
 // FormValueDefault通过它的名称返回一个已解析的表单值
@@ -55,7 +55,7 @@ PostValues(name string) []string
 FormFile(key string) (multipart.File, *multipart.FileHeader, error)
 ```
 
-## 多部分表单(Multipart/Urlencoded Form)
+## Multipart/Urlencoded Form
 
 ```go
 func main() {
@@ -76,7 +76,7 @@ func main() {
 }
 ```
 
-## 另一个例子: 查询 + 发送form
+## 另一个例子: query + post form
 
 ```http
 POST /post?id=1234&page=1 HTTP/1.1
@@ -110,7 +110,7 @@ id: 1234; page: 1; name: manu; message: this_is_great
 
 ## 上传文件
 
-Iris Context为上传文件(将文件从请求文件数据保存到主机系统的硬盘上)提供了一个帮手, 下面有更多关于 `Context.UploadFormFiles` 的方法
+Iris上下文为上传文件(将文件从请求文件数据保存到host系统的硬盘上)提供了一个帮手, 下面有更多关于 `Context.UploadFormFiles` 的方法
 
 UploadFormFiles上传任何从客户端接收到的文件到系统物理地址 "destDirectory"
 
@@ -162,7 +162,7 @@ func beforeSave(ctx iris.Context, file *multipart.FileHeader) {
 }
 ```
 
-怎样 `curl`:
+使用 `curl`:
 
 ```shell
 curl -X POST http://localhost:8080/upload \
@@ -171,5 +171,4 @@ curl -X POST http://localhost:8080/upload \
   -H "Content-Type: multipart/form-data"
 ```
 
-[戳我](https://github.com/kataras/iris/tree/master/_examples/request-body)获得更多的例子
-[或者我](https://github.com/kataras/iris/tree/master/_examples/file-server)
+[戳我](https://github.com/kataras/iris/tree/master/_examples/request-body)或者[我](https://github.com/kataras/iris/tree/master/_examples/file-server)获得更多的例子
