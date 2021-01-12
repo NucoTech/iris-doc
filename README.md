@@ -49,7 +49,7 @@ Iris框架Wiki翻译文档
   - [出版物](/Publications.md)
   - [性能测试](/Benchmarks.md)
   - [支持](/Support.md)
-  - [示例](/Examples.md)
+  - [示例](https://github.com/kataras/iris/tree/master/_examples)
 
 ## Contributors
 
