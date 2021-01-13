@@ -40,16 +40,16 @@ Iris框架Wiki翻译文档
 - [x] [Websockets](/Websockets.md)
 - [x] [依赖注入](/DependencyInjection.md)
 - [ ] [MVC](/MVC.md)
-- [x] [gRPC](/gRPC.md)
-- [x] [Sitemap](/Sitemap.md)
+- [x] [gRPC](/gRCP.md)
+- [ ] [Sitemap](/Sitemap.md)
 - [x] [国际化](/Localization.md)
 - [x] [测试](/Testing.md)
 - [x] 资源
-  - [入门套件](/StarterKit.md)
-  - [出版物](/Publications.md)
-  - [性能测试](/Benchmarks.md)
-  - [支持](/Support.md)
-  - [示例](/Examples.md)
+  - [入门套件](/Resources/StarterKits.md)
+  - [出版物](/Resources/Publications.md)
+  - [性能测试](/Resources/Benchmarks.md)
+  - [支持](/Resources/Support.md)
+  - [示例](https://github.com/kataras/iris/tree/master/_examples)
 
 ## Contributors
 
@@ -58,3 +58,7 @@ Iris框架Wiki翻译文档
 - [keylxiao](https://github.com/keylxiao)
 
 ## License
+
+&copy; 2021 ~ 本仓库内容遵循[署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)协议
+
+![CC BY-NC-SA](https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png)
