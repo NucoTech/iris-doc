@@ -7,12 +7,12 @@ Iris框架Wiki翻译文档
 ## Progress
 
 - [x] [Iris是什么](/WhatIsIris.md)
-- [ ] Getting Started
+- [x] Getting Started
   - [下载Iris](/GettingStarted/InstallingIris.md)
   - [快速上手](/GettingStarted/QuickStart.md)
 - [x] [Host](/Host/README.md)
   - [自动TLS的公共域名](/Host/AutomaticPublicDomainWithTLS.md)
-- [ ] [配置项](/Configuration.md)
+- [x] [配置项](/Configuration.md)
 - [ ] [路由](/Routing/README.md)
   - [路径参数类型](/Routing/PathParamterTypes.md)
   - [逆向查找](/Routing/ReverseLookups.md)
@@ -34,17 +34,17 @@ Iris框架Wiki翻译文档
 - [x] [Cache](/Cache.md)
 - [x] [视图层(View)](/View.md)
 - [x] [Cookies](/Cookies.md)
-- [ ] [会话(Sessions)](/Sessions/README.md)
+- [x] [会话(Sessions)](/Sessions/README.md)
   - [数据库](/Sessions/Database.md)
   - [Flash Messages](/Sessions/FlashMessages.md)
-- [ ] [Websockets](/Websockets.md)
-- [ ] [依赖注入](/DependencyInjection.md)
+- [x] [Websockets](/Websockets.md)
+- [x] [依赖注入](/DependencyInjection.md)
 - [ ] [MVC](/MVC.md)
-- [ ] [gRPC](/gRCP.md)
-- [ ] [Sitemap](/Sitemap.md)
-- [ ] [国际化](/Localization.md)
-- [ ] [测试](/Testing.md)
-- [ ] 资源
+- [x] [gRPC](/gRPC.md)
+- [x] [Sitemap](/Sitemap.md)
+- [x] [国际化](/Localization.md)
+- [x] [测试](/Testing.md)
+- [x] 资源
   - [入门套件](/StarterKit.md)
   - [出版物](/Publications.md)
   - [性能测试](/Benchmarks.md)
