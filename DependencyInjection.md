@@ -64,7 +64,7 @@ func main() {
 }
 ```
 
-眼见为实, 您看, 没有 `ctx.ReadJSON(&v)` 和 `ctx.JSON(send)` 甚至是 `error` 需要处理, 这是一个巨大的解脱, 但如果您需要, 您仍然可以控制这些, 甚至是依赖项产生的错误, 以下是新型 `组.ConfigureContainer()` 方法和所需参数的列表
+眼见为实, 您看, 没有 `ctx.ReadJSON(&v)` 和 `ctx.JSON(send)` 甚至是 `error` 需要处理, 这是一个巨大的解脱, 但如果您需要, 您仍然可以控制这些, 甚至是依赖项产生的错误, 以下是新型 `Party.ConfigureContainer()` 方法和所需参数的列表
 
 ```go
 // 容器(Container)控制该组具有依赖特性的DI容器
@@ -110,9 +110,9 @@ UseResultHandler(handler func(next iris.ResultHandler) iris.ResultHandler)
 </details>
 
 ```go
-// Use和通用组相同的 "Use" 但是它接收动态功能作为它的 "handlersFn" 输入
+// Use和通用组 "Use" 相同, 但是它接收动态功能作为它的 "handlersFn" 输入
 Use(handlersFn ...interface{})
-// Done和通用组相同的 "Done" 但是它接收动态功能作为它的 "handlersFn" 输入
+// Done和通用组 "Done" 相同, 但是它接收动态功能作为它的 "handlersFn" 输入
 Done(handlersFn ...interface{})
 ```
 

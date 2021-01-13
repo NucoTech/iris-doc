@@ -29,6 +29,6 @@ DeleteFlash(key string)
 ClearFlashes()
 ```
 
-方法的名称就解释了它的作用, 例如, 如果您需要获得一条消息并在下一个请求之前删除它,  就是用 `GetFlash` , 当您只需要检索而不需删除时, 只需要使用 `PeekFlash`
+方法的名称就解释了它的作用, 例如, 如果您需要获得一条消息并在下一个请求之前删除它,  就使用 `GetFlash` , 当您只需要检索而不需删除时, 只需要使用 `PeekFlash`
 
 小贴士: Flash messages并不会存储在数据库中

@@ -6,7 +6,7 @@ gRPC*是一个现代的开源高性能远程过程调用框架, 可以在任何�
 
 Iris和gRPC集成在 [mvc](https://github.com/kataras/iris/tree/master/mvc) 包中
 
-你是否曾有过将你的应用或它的部分从HTTP转换到gGRPC出现问题? 你是否曾希望你的gRPC服务也有像样的HTTP框架支持? 现在, 有了Iris, 你就拥有了两个领域中最好的框架。不需要修改您现有的gRPC服务代码, 您就可以通过控制器(您的服务结构体的值)将它们注册为Iris HTTP路由
+你是否曾有过将你的应用或它的部分从HTTP转换到gGRPC时出现问题? 你是否曾希望你的gRPC服务也有像样的HTTP框架支持? 现在, 有了Iris, 你就拥有了两个领域中最好的框架。不需要修改您现有的gRPC服务代码, 您就可以通过控制器(您的服务结构体的值)将它们注册为Iris HTTP路由
 
 ![conversation](https://github.com/kataras/iris/wiki/_assets/grpc-compatible-question.png)
 
