@@ -45,10 +45,10 @@ Iris框架Wiki翻译文档
 - [x] [国际化](/Localization.md)
 - [x] [测试](/Testing.md)
 - [x] 资源
-  - [入门套件](/StarterKit.md)
-  - [出版物](/Publications.md)
-  - [性能测试](/Benchmarks.md)
-  - [支持](/Support.md)
+  - [入门套件](/Resources/StarterKits.md)
+  - [出版物](/Resources/Publications.md)
+  - [性能测试](/Resources/Benchmarks.md)
+  - [支持](/Resources/Support.md)
   - [示例](https://github.com/kataras/iris/tree/master/_examples)
 
 ## Contributors
