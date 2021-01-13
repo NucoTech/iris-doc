@@ -7,12 +7,12 @@ Iris框架Wiki翻译文档
 ## Progress
 
 - [x] [Iris是什么](/WhatIsIris.md)
-- [ ] Getting Started
+- [x] Getting Started
   - [下载Iris](/GettingStarted/InstallingIris.md)
   - [快速上手](/GettingStarted/QuickStart.md)
 - [x] [Host](/Host/README.md)
   - [自动TLS的公共域名](/Host/AutomaticPublicDomainWithTLS.md)
-- [ ] [配置项](/Configuration.md)
+- [x] [配置项](/Configuration.md)
 - [ ] [路由](/Routing/README.md)
   - [路径参数类型](/Routing/PathParamterTypes.md)
   - [逆向查找](/Routing/ReverseLookups.md)
