@@ -36,7 +36,7 @@ Iris框架Wiki翻译文档
 - [x] [Cookies](/Cookies.md)
 - [ ] [会话(Sessions)](/Sessions/README.md)
   - [数据库](/Sessions/Database.md)
-  - [Flash Messages](/Sessions/Messages.md)
+  - [Flash Messages](/Sessions/FlashMessages.md)
 - [ ] [Websockets](/Websockets.md)
 - [ ] [依赖注入](/DependencyInjection.md)
 - [ ] [MVC](/MVC.md)
