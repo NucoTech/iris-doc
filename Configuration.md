@@ -166,9 +166,6 @@ type Configuration struct {
     // 
     // 默认为false。
     EnablePathEscape bool `json:"enablePathEscape,omitempty" yaml:"EnablePathEscape" toml:"EnablePathEscape"`
-    // ForceLowercaseRouting if enabled, converts all registered routes paths to lowercase
-    // and it does lowercase the request path too for matching.
-    // 
     // ForceLowercaseRouting如果配置为允许, 会将所有的注册路径转换成小写。
     // 同时也会将所有的请求路径转换成小写便于匹配。
     // 
