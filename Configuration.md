@@ -1,16 +1,16 @@
 # 配置项(Configuration)
 
-在[先前的章节](https://github.com/kataras/iris/wiki/Host)中我们已经学习了第一个输入参数`app.Run`, 现在我们看看下一个是什么。
+在[先前的章节](https://github.com/kataras/iris/wiki/Host)中我们已经学习了`app.Run`的第一个输入参数, 现在我们看看第二个是什么。
 
 让我们从基础开始。`iris.New`函数返回一个`iris.Application`。这个变量能通过`Configure(...iris.Configurator)`和`Run`的方法来进行配置。
 
-第二部分配置, `app.Run/Listen`方法由一个或多个`iris.Configurator`来配置。每个`iris.Configurator`是一类: `func(app *iris.Application)`。用户自己配置的`iris.Configurator`也可以被传递进去来修改你的`*iris.Application`。
+第二个可选, `app.Run/Listen`方法的可变参数接受一个或多个`iris.Configurator`。`iris.Configurator`是`func(app *iris.Application)`类型。自定义的`iris.Configurator`也可以被传递以修改你的`*iris.Application`。
 
-每一个核心的[Configuration](https://godoc.org/github.com/kataras/iris#Configuration)都内嵌了一个`iris.Configurator`, 例如`iris.WithoutStartupLog`, `iris.WithCharset("UTF-8")`, `iris.WithOptimizations`, 还有`iris.WithConfiguration(iris.Configuration{...})`等等函数。
+每一个核心的[Configuration](https://godoc.org/github.com/kataras/iris#Configuration)字段都内置了`iris.Configurator`们, 例如`iris.WithoutStartupLog`, `iris.WithCharset("UTF-8")`, `iris.WithOptimizations`, 还有`iris.WithConfiguration(iris.Configuration{...})`等函数。
 
-每一个模块例如iris view engine, websockets, sessions, 以及其他的中间件都有它们独有的配置。
+每一个模块例如iris view engine, websockets, sessions, 以及其他的中间件都有它们独有的配置和选项。
 
-## 使用配置(UsingTheConfiguration)
+## 使用[配置](https://godoc.org/github.com/kataras/iris#Configuration)
 
 所有的`iris.Configuration`字段都被预设成了最常见的情况。如果你在任何时候想使用自定义的`iris.Configuration`, 可以调用app.Configure(accepts iris.Configurator)来进行你的配置。
 
@@ -27,30 +27,30 @@ app.Listen(":8080", config)
 下列是所有有效的配置
 
 ```go
-// Tunnel 是一个隧道的配置结构体
+// Tunnel是TunnelingConfiguration结构体的Tunnels字段
 type Tunnel struct {
-    // Name是唯一一个必须的字段,
+    // Name是唯一一个需要的字段,
     // 它被用来建立和关闭隧道,
     // 例如: "MyApp"
-    // 如果这个字段不为空的话, 当iris运行时就会建立一个ngrok的隧道。
+    // 如果这个字段不为空的话, 当iris运行时就会生成一个ngrok的隧道。
     Name string `json:"name" yaml:"Name" toml:"Name"`
-    // Addr是一个可选的字段, 它会在Iris的运行的过程中进行配置, 
-    // 然而, 如果`iris.Raw`字段被配置过, 这个字段将会根据`hostname:port`
-    // 表单进行配置, 因为框架不能检测出用户自己运行服务的地址。
+    // Addr是一个基础的可选字段, 它会内置在Iris运行的时进行设置, 
+    // 然而, 如果用到了`iris.Raw`字段, 这个字段将会根据`hostname:port`
+    // 表单进行配置, 因为框架不能感知在自定义运行时服务的地址
     Addr string `json:"addr,omitempty" yaml:"Addr" toml:"Addr"`
 }
 
-// 隧道配置包含针对ngrok特性的设置。
-// 需注意ngrok服务是否已经在主机上安装好了。
+// TunnelingConfiguration包含通过ngrok特性的可选的tunneling的设置。
+// 需注意host上是否已经安装了ngrok服务。
 type TunnelingConfiguration struct {
     // AuthToken是一个可选字段, 用来给ngrok鉴权。
     // ngrok authtoken <YOUR_AUTHTOKEN>
     AuthToken string `json:"authToken,omitempty" yaml:"AuthToken" toml:"AuthToken"`
 
     // No...
-    // Config是一个可选字段, 能被用来从文件系统加载ngrok的配置
+    // Config是可选的, 能被用来从文件系统加载ngrok的配置
     //
-    // 如果你没有自定义目录存储配置文件, ngrok尝试从默认的路径
+    // 如果你没有指定存放配置文件的位置, ngrok尝试从默认的路径
     // $HOME/.ngrok2/ngrok.yml读取文件。
     // 这个配置文件是可选的; 如果这个目录不存在，也不会报错。
     // Config string `json:"config,omitempty" yaml:"Config" toml:"Config"`
@@ -59,42 +59,42 @@ type TunnelingConfiguration struct {
     // 如果它是空的, 框架就会试图从系统环境变量去寻找它。
     Bin string `json:"bin,omitempty" yaml:"Bin" toml:"Bin"`
 
-    // WebUIAddr是一个正在运行ngrok的web的接口地址。
-    // 如果一个ngrok的示例在手动运行之前已经启动了, 
-    // Iris会试图获取默认的web接口地址(http://127.0.0.1:4040), 
-    // 然而如果使用了自定义的web接口, 这个字段就必须被设置成对应的地址
+    // WebUIAddr是一个正在运行ngrok实例的web的接口地址。
+    // 在试图手动启动ngrok实例之前, 
+    // Iris会试图获取默认的web接口地址(http://127.0.0.1:4040)来确定它是否在运行。 
+    // 然而如果使用了自定义的web接口, 这个字段就必须被设置
     // 例如: http://127.0.0.1:5050。
     WebInterface string `json:"webInterface,omitempty" yaml:"WebInterface" toml:"WebInterface"`
 
     // Region是一个可选项, 用来设置地区。默认为"us"
     // 以下变量有效
-    // "us" for 美国(United States)
-    // "eu" for 欧洲(Europe)
-    // "ap" for 亚洲/太平洋(Asia/Pacific)
-    // "au" for 澳大利亚(Australia)
-    // "sa" for 南美(South America)
-    // "jp" for 日本(Japan)
-    // "in" for 印度(India)
+    // "us"代表美国(United States)
+    // "eu"代表欧洲(Europe)
+    // "ap"代表亚洲/太平洋(Asia/Pacific)
+    // "au"代表澳大利亚(Australia)
+    // "sa"代表南美(South America)
+    // "jp"代表日本(Japan)
+    // "in"代表印度(India)
     Region string `json:"region,omitempty" yaml:"Region" toml:"Region"`
 
     // Tunnels是网络隧道的集合。
-    // 每一个Iris的程序对应一个网络隧道, 通常只需要一个。
+    // 每个应用程序的每个Iris Host有一个隧道, 通常只需要一个。
     Tunnels []Tunnel `json:"tunnels" yaml:"Tunnels" toml:"Tunnels"`
 }
 
-// Configuration包含了一个Iris程序所必须的实例
+// Configuration包含了Iris应用程序实例所必要的设置
 // 所有的字段都是可选的, 默认的值会在一个普通的web程序上起作用
-// 一个变量的配置通过`WithConfiguration`来设置。
+// 配置项的值可以通过`WithConfiguration`来传递。
 // 
 // Usage:
 // conf := iris.Configuration{ ... }
 // app := iris.New()
 // app.Configure(iris.WithConfiguration(conf)) OR
-// app.Run/Listen(..., iris.WithConfiguration(conf)).
+// app.Run/Listen(..., iris.WithConfiguration(conf))。
 type Configuration struct {
-    // LogLevel用来输出程序的日志等级信息。
-    // Logger, 默认大多数情况下用于记录构建状态, 但是它也可以用来调试在
-    // 程序运行中报出的错误, 例如: 
+    // LogLevel是应用程序输出消息时应该使用的日志等级。
+    // Logger, 默认大多数情况用于构建态, 但是它也可用在调试
+    // 程序运行时的报错信息, 例如: 
     // 当客户端发送一些异常的数据结构体时(例如: Context.JSON/JSONP/XML...)
     //
     // 默认是"info"。以下值有效:
@@ -106,28 +106,26 @@ type Configuration struct {
     // * "debug"
     LogLevel string `json:"logLevel" yaml:"LogLevel" toml:"LogLevel" env:"LOG_LEVEL"`
 
-    // Tunneling是一个可选项， 用来启用这个Iris项目实例的ngrok的http(s)隧道
-    // 参见`WithTunneling`配置
-    // Tunneling TunnelingConfiguration `json:"tunneling,omitempty" yaml:"Tunneling" toml:"Tunneling"`
+    // Tunneling是一个可选项， 用来启用这个Iris应用程序实例的ngrok http(s)隧道
+    // 参见`WithTunneling`配置器(Configurator)
+    Tunneling TunnelingConfiguration `json:"tunneling,omitempty" yaml:"Tunneling" toml:"Tunneling"`
 
-    // IgnoreServerErrors will cause to ignore the matched "errors"
-    // IgnoreServerErrors将从运行的主程序里忽略一个匹配到的"errors"
-    // 这是一个字符串的切片, 而不是错误的切片。用户可以使用yaml或toml
-    // 配置文件来注册这些错误。
-    // 类比其余的那些配置字段
-    // 参见`WithoutServerError(...)`。
+    // IgnoreServerErrors将从主程序的`Run`函数里忽略匹配到的"errors"
+    // 这是一个字符串的切片, 而不是错误的切片。
+    // 用户可以跟其他的配置字段一样使用yaml或者toml配置文件注册这些错误。
+    // 参见`WithoutServerError(...)`函数。
     //
     // Example: https://github.com/kataras/iris/tree/master/_examples/http-server/listen-addr/omit-server-errors
     //
     // 默认是空切片。
     IgnoreServerErrors []string `json:"ignoreServerErrors,omitempty" yaml:"IgnoreServerErrors" toml:"IgnoreServerErrors"`
 
-    // DisableStartupLog如果配置为true, 它将不会在服务启动时记录日志。
+    // DisableStartupLog如果配置为true, 在服务器启动时会关闭写入。
     // 默认为false。
     DisableStartupLog bool `json:"disableStartupLog,omitempty" yaml:"DisableStartupLog" toml:"DisableStartupLog"`
     // DisableInterruptHandler如果被设置成true, 当用户按下
-    // control/cmd+C时程序不会优雅的退出。
-    // 当你计划使用自己的方法去处理关闭服务请求时, 该字段可设置为true。
+    // control/cmd+C时, 程序不会自动优雅的退出。
+    // 当你准备自行通过自定义的host.Task处理请求时, 该字段应设置为true。
     // 
     // 默认为false。
     DisableInterruptHandler bool `json:"disableInterruptHandler,omitempty" yaml:"DisableInterruptHandler" toml:"DisableInterruptHandler"`
@@ -139,7 +137,7 @@ type Configuration struct {
     // 路径。
     // 参见DisablePathCorrectionRedirection来允许直接处理访问请求而
     // 不是重定向访问。
-    //
+    // 
     // 默认为false。
     DisablePathCorrection bool `json:"disablePathCorrection,omitempty" yaml:"DisablePathCorrection" toml:"DisablePathCorrection"` 
     // DisablePathCorrectionRedirection在任何时候配置都会起作用。
@@ -309,24 +307,24 @@ type Configuration struct {
     // 
     // 默认为空字典。
     SSLProxyHeaders map[string]string `json:"sslProxyHeaders" yaml:"SSLProxyHeaders" toml:"SSLProxyHeaders"`
-    // HostProxyHeaders定义了一个集合来保存客户端的代理主机名。
+    // HostProxyHeaders为客户端定义了headers的集合保存代理过(proxied)的主机名。
     // 参见`Context.Host()`了解更多。
     //
     // 默认为空字典。
     HostProxyHeaders map[string]bool `json:"hostProxyHeaders" yaml:"HostProxyHeaders" toml:"HostProxyHeaders"`
-    // Other是用户自定义、动态的设置, 可以置空。
-    // 这个字段只用于你来设置任何你想要的程序。
+    // Other是自定义、动态的设置, 可以为空。
+    // 这个字段只用于设置你在应用程序中的一些选项。
     //
     // 默认为空字典。
     Other map[string]interface{} `json:"other,omitempty" yaml:"Other" toml:"Other"`
 }
 ```
 
-## 从YAML导入(LoadFromYAML)
+## 从[YAML](https://yaml.org/)导入
 
 使用`iris.YAMl("path")`。
 
-文件: iris.yml
+文件: **iris.yml**
 
 ```yml
 FireMethodNotAllowed: true
@@ -335,18 +333,18 @@ TimeFormat: Mon, 01 Jan 2006 15:04:05 GMT
 Charset: UTF-8
 ```
 
-文件: main.go
+文件: **main.go**
 
 ```go
 config := iris.WithConfiguration(iris.YAML("./iris.yml"))
 app.Listen(":8080", config)
 ```
 
-## 从TOML导入(LoadFromTOML)
+## 从[TOML](https://github.com/toml-lang/toml)导入
 
 使用`iris.TOML("path")`。
 
-文件: iris.tml
+文件: **iris.tml**
 
 ```tml
 FireMethodNotAllowed = true
@@ -359,17 +357,17 @@ Charset = "UTF-8"
     ServerOwner = "admin@example.com"
 ```
 
-文件: main.go
+文件: **main.go**
 
 ```go
 config := iris.WithConfiguration(iris.TOML("./iris.tml"))
 app.Listen(":8080", config)
 ```
 
-## 使用函数的方法(UsingTheFunctionalWay)
+## 使用函数方式
 
-如同我们已经提到过的, 你可以使用任意数量的`iris.Configurator`作为`app.Run/Listen`的第二个参数。Iris提供了一个设置方法来设置每一个`iris.Configurator`
-字段。
+如同我们已经提到过的, 你可以在`app.Run/Listen`的第二个参数传递任何数量的`iris.Configrator`。Iris为每一个`iris.Configurator`
+字段提供了一个选项。
 
 ```go
 app.Listen(":8080", iris.WithoutInterruptHandler,
@@ -382,9 +380,9 @@ app.Listen(":8080", iris.WithoutInterruptHandler,
 )
 ```
 
-改变一部分配置字段并不困难。前缀: "With"或者"Without", 编辑器会帮助你浏览所有的配置项, 并能确保你的文档不会出现错误。
+当你想去改配置文件中的一些字段是极好的。前缀: "With"或者"Without", 代码编辑器会帮助你浏览所有的配置项, 来确保文档没有问题。
 
-下列是一些用函数配置的例子
+函数选项列表
 
 ```go
 var (
@@ -419,9 +417,9 @@ func WithOtherValue(key string, val interface{}) Configurator
 func WithSitemap(startURL string) Configurator
 ```
 
-## 用户自定义变量(CustomValues)
+## 自定义值
 
-`iris.Configuration`包含了一个字段名字叫做`Other map[string]interface{}`, 它可以接受任意自定义的`key:value`设置, 因此你可以用这个字段来按照你自己的需求来配置你自己的变量。
+`iris.Configuration`包含了一个叫`Other map[string]interface{}`的字段, 它可以接受任意自定义的键值对(`key:value`)选项, 因此你可以根据自己的应用程序需求使用这个字段配置指定值。
 
 ```go
 app.Listen(":8080", 
@@ -430,9 +428,9 @@ app.Listen(":8080",
 )
 ```
 
-你可以通过`app.ConfigurationReadOnly`来访问配置字段
+你可以通过`app.ConfigurationReadOnly`来访问那些字段
 
-## 从Context中读取配置(AccessConfigurationFromContext)
+## 从上下文中获取配置
 
 ```go
 func (ctx iris.Context) {
