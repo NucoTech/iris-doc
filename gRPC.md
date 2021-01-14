@@ -16,7 +16,7 @@ Iris和gRPC集成在 [mvc](https://github.com/kataras/iris/tree/master/mvc) 包�
 
 我们将遵循[官方helloworld gRPC实例](https://github.com/grpc/grpc-go/tree/master/examples/helloworld) ,如果您用gPRC服务, 那您可以跳过前五步
 
-1.让我们来编写请求和响应的原生表
+1.让我们来编写请求和响应的原型表
 
 ```go
 syntax = "proto3";
@@ -92,9 +92,9 @@ pb.RegisterGreeterServer(grpcServer, myService)
 
 6.注册 `myService` 到Iris
 
-`mvc.New(party).Handle(ctrl, mvc.GRPC{...})` 选项允许每一组注册gRPC服务(不需要完整的装饰器), 也可以严格的选择访问仅gRPC的客户端
+`mvc.New(party).Handle(ctrl, mvc.GRPC{...})` 选项允许每一组注册gRPC服务(不需要完整的包装器), 也可以严格的选择访问仅gRPC的客户端
 
-为gRPC服务注册MVC应用程序控制器, 由于 `ServiceName` 不同, 你可以在同一方或同一应用程序中绑定尽可能多的mvc gRpc服务
+为gRPC服务注册MVC应用程序控制器, 由于 `ServiceName` 不同, 你可以在同一组或应用程序中绑定尽可能多的mvc gRpc服务
 
 ```go
 import (
@@ -115,9 +115,9 @@ rootApp.Handle(myService, mvc.GRPC{
 })
 ```
 
-7.生成TLS值
+7.生成TLS Keys
 
-Iris服务**必须跑在TLS**(一个gRPC依赖)下
+Iris服务**必须跑在TLS**(gRPC的一个要求)下
 
 ```shell
 openssl genrsa -out server.key 2048
@@ -130,7 +130,7 @@ openssl req -new -x509 -sha256 -key server.key -out server.crt -days 3650
 app.Run(iris.TLS(":443", "server.crt", "server.key"))
 ```
 
-POST请求: `https://localhost:443/helloworld.Greeter/SayHello` 发送数据 `{"name": "John"}`将会得到输出 `{"message": "Hello John"}`
+POST: `https://localhost:443/helloworld.Greeter/SayHello` 发送数据 `{"name": "John"}`将会得到输出 `{"message": "Hello John"}`
 
 HTTP客户端和gRPC客户端都可以与我们的Iris+gRPC服务交流
 
