@@ -13,7 +13,7 @@ Iris框架Wiki翻译文档
 - [x] [Host](/Host/README.md)
   - [自动TLS的公共域名](/Host/AutomaticPublicDomainWithTLS.md)
 - [x] [配置项](/Configuration.md)
-- [x] [路由](/Routing/README.md)
+- [ ] [路由](/Routing/README.md)
   - [路径参数类型](/Routing/PathParamterTypes.md)
   - [反向查找](/Routing/ReverseLookups.md)
   - [中间件](/Routing/Middleware.md)

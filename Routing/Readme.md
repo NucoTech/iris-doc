@@ -36,3 +36,126 @@ app.Listen(":8080", iris.WithoutPathCorrection)
 ```go
 app.Listen(":8080", iris.WithoutPathCorrectionRedirection)
 ```
+
+## API
+
+支持所有类型的Http方法，开发者可以在同一个路径下绑定多个不同的Http方法。
+
+第一个参数是Http方法，第二个参数是路由的请求路径，第三个可变参数应该包含至少一个`iris.Handler`，当客户端从服务器请求特定的资源路径时，根据绑定的顺序逐一执行。
+
+示例代码:
+
+```go
+app := iris.New()
+
+app.Handle("GET", "/contact", func(ctx iris.Context) {
+    ctx.HTML("<h1> Hello from /contact </h1>")
+})
+```
+
+为了使最终开发者的工作更加简单，iris对每种Http方法都提供了帮助方法，第一个参数是路由的请求路径，第二个可变参数需要包含至少一个`iris.Handler`，当客户端从服务器请求特定的资源路径时，根据绑定的顺序逐一执行。
+
+示例代码：
+
+```go
+app := iris.New()
+
+// Method: "GET"
+app.Get("/", handler)
+
+// Method: "POST"
+app.Post("/", handler)
+
+// Method: "PUT"
+app.Put("/", handler)
+
+// Method: "DELETE"
+app.Delete("/", handler)
+
+// Method: "OPTIONS"
+app.Options("/", handler)
+
+// Method: "TRACE"
+app.Trace("/", handler)
+
+// Method: "CONNECT"
+app.Connect("/", handler)
+
+// Method: "HEAD"
+app.Head("/", handler)
+
+// Method: "PATCH"
+app.Patch("/", handler)
+
+// register the route for all HTTP Methods
+app.Any("/", handler)
+
+func handler(ctx iris.Context){
+    ctx.Writef("Hello from method: %s and path: %s\n", ctx.Method(), ctx.Path())
+}
+```
+
+### 离线路由
+
+你也可以使用Iris里面的一个特殊方法，它叫做`None`，你可是使用它去从外部隐藏一个路由但是仍然可以由其他路由的控制器通过`Context.Exec`方法来调用。每个API控制器方法返回一个路由值。可以通过`IsOnline`方法来返回路由现在的状态。你可以通过一个路由的`Route.Method`值将这个路由的状态由离线改为在线，反之亦然。当然，在服务器环境下需要一个可以安全使用的`app.RefreshRouter()`才能对路由进行修改。让我们看一个更完整的实例代码：
+
+```go
+// file: main.go
+package main
+
+import (
+    "github.com/kataras/iris/v12"
+)
+
+func main() {
+    app := iris.New()
+
+    none := app.None("/invisible/{username}", func(ctx iris.Context) {
+        ctx.Writef("Hello %s with method: %s", ctx.Params().Get("username"), ctx.Method())
+
+        if from := ctx.Values().GetString("from"); from != "" {
+            ctx.Writef("\nI see that you're coming from %s", from)
+        }
+    })
+
+    app.Get("/change", func(ctx iris.Context) {
+
+        if none.IsOnline() {
+            none.Method = iris.MethodNone
+        } else {
+            none.Method = iris.MethodGet
+        }
+
+        // refresh re-builds the router at serve-time in order to
+        // be notified for its new routes.
+        app.RefreshRouter()
+    })
+
+    app.Get("/execute", func(ctx iris.Context) {
+        if !none.IsOnline() {
+            ctx.Values().Set("from", "/execute with offline access")
+            ctx.Exec("NONE", "/invisible/iris")
+            return
+        }
+
+        // same as navigating to "http://localhost:8080/invisible/iris"
+        // when /change has being invoked and route state changed
+        // from "offline" to "online"
+        ctx.Values().Set("from", "/execute")
+        // values and session can be
+        // shared when calling Exec from a "foreign" context.
+        // 	ctx.Exec("NONE", "/invisible/iris")
+        // or after "/change":
+        ctx.Exec("GET", "/invisible/iris")
+    })
+
+    app.Listen(":8080")
+}
+```
+
+#### 如何去运行
+
+1. `go run main.go`
+2. 通过浏览器打开` http://localhost:8080/invisible/iris ` 你将看到一个 `404 not found` 页面
+3. 然而 `http://localhost:8080/execute` 的路由能够被执行
+4. 现在，如果你打开 `http://localhost:8080/change` 并刷新 `/invisible/iris` 标签，你将看到你能看到的。
