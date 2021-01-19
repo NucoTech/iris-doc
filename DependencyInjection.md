@@ -1,6 +1,6 @@
 # 依赖注入(dependency injection)
 
-Iris通过请求处理程序和基于返回值的服务器应答, 为依赖注入提供一流的支持
+Iris通过基于返回值的请求处理和服务器应答, 为依赖注入提供一流的支持
 
 ## 依赖注入(Dependency Injection)
 
@@ -28,7 +28,7 @@ app.ConfigureContainer(func (api *iris.APIContainer){
 - 接收一个或多个路径参数并请求数据, 即一个payload
 - 发送一个响应, 即一个payload(JSON, XML...)
   
-新型Iris依赖注入特性比上一版快了33.2%, 这将进一步降低处理程序和具有依赖关系的处理程序之间的性能成本, 让我们在使用新的 `组.ConfigureContainer(builder ...func(*iris.APIContainer)) *APIContainer` 方法(该方法返回 `Handle(method, relativePath string, handlersFn ...interface{}) *Route` 和 `RegisterDependency` 一类的方法)时获得更安全和更好性能的体验
+新型Iris依赖注入特性比上一版快了33.2%, 这将进一步降低处理程序和具有依赖关系的处理程序之间的性能成本, 让我们在使用新的 `Party.ConfigureContainer(builder ...func(*iris.APIContainer)) *APIContainer` 方法(该方法返回 `Handle(method, relativePath string, handlersFn ...interface{}) *Route` 和 `RegisterDependency` 一类的方法)时获得更安全和更好性能的体验
 
 看看在使用Iris时, 您的代码库是多么地整洁:
 
@@ -80,7 +80,7 @@ OnError(errorHandler func(iris.Context, error))
 ```
 
 ```go
-// RegisterDependency添加一个依赖项, 可以是一个单独的结构体值或者功能
+// RegisterDependency添加一个依赖项, 可以是一个单独的结构体值或者函数
 // 遵从以下语法:
 // * <T> {structValue}
 // * func(accepts <T>)                                 returns <D> or (<D>, error)
@@ -90,7 +90,7 @@ OnError(errorHandler func(iris.Context, error))
 // * func(accepts1 <D>, accepts2 <T>)                  returns <E> or (<E>, error) or error
 // * func(acceptsPathParameter1 string, id uint64)     returns <T> or (<T>, error)
 //
-// 方法:
+// 使用方法:
 //
 // - RegisterDependency(loggerService{prefix: "dev"})
 // - RegisterDependency(func(ctx iris.Context) User {...})
@@ -110,9 +110,9 @@ UseResultHandler(handler func(next iris.ResultHandler) iris.ResultHandler)
 </details>
 
 ```go
-// Use和通用组 "Use" 相同, 但是它接收动态功能作为它的 "handlersFn" 输入
+// Use和通用组 "Use" 相同, 但是它接收动态函数作为它的 "handlersFn" 输入
 Use(handlersFn ...interface{})
-// Done和通用组 "Done" 相同, 但是它接收动态功能作为它的 "handlersFn" 输入
+// Done和通用组 "Done" 相同, 但是它接收动态函数作为它的 "handlersFn" 输入
 Done(handlersFn ...interface{})
 ```
 
@@ -135,9 +135,9 @@ Get(relativePath string, handlersFn ...interface{}) *Route
 
 | 类型 | 映射到 |
 | --- | --- |
-| [*mvc.Application](https://pkg.go.dev/github.com/kataras/iris/v12/mvc?tab=doc#Application) | Current MVC Application |
-| [iris.Context](https://pkg.go.dev/github.com/kataras/iris/v12/context?tab=doc#Context) | Current Iris Context |
-| [*sessions.Session](https://pkg.go.dev/github.com/kataras/iris/v12/sessions?tab=doc#Session) | Current Iris Session |
+| [*mvc.Application](https://pkg.go.dev/github.com/kataras/iris/v12/mvc?tab=doc#Application) | 当前MVC应用 |
+| [iris.Context](https://pkg.go.dev/github.com/kataras/iris/v12/context?tab=doc#Context) | 当前Iris上下文 |
+| [*sessions.Session](https://pkg.go.dev/github.com/kataras/iris/v12/sessions?tab=doc#Session) | 当前Iris会话 |
 | [context.Context](https://golang.org/pkg/context/#Context) | [ctx.Request().Context()](https://golang.org/pkg/net/http/#Request.Context) |
 | [*http.Request](https://golang.org/pkg/net/http/#Request) | ctx.Request() |
 | [http.ResponseWriter](https://golang.org/pkg/net/http/#ResponseWriter) | ctx.ResponseWriter() |
@@ -259,14 +259,14 @@ func deleteUser(db *sql.DB, id uint64) *response {
 
 ## 注册依赖项(Register Dependencies)
 
-1.导入包与数据库交互, go-sqlite3包是一个[SQLite](https://www.sqlite.org/index.html)的数据库控制器
+1.导入与数据库交互的包, go-sqlite3包是一个[SQLite](https://www.sqlite.org/index.html)的数据库驱动器
 
 ```go
 import "database/sql"
 import _ "github.com/mattn/go-sqlite3"
 ```
 
-2.配置容器([见上方](#请求响应和路径参数)), 注册依赖性, 处理程序需要一个 *sql.DB实例
+2.配置容器([见上方](#请求响应和路径参数)), 注册你的依赖项, 处理程序需要一个 *sql.DB实例
 
 ```go
 localDB, _ := sql.Open("sqlite3", "./foo.db")
@@ -349,7 +349,7 @@ curl --request POST 'http://localhost:8080/users?firstname=John&lastname=Doe'
 
 - 如果它是一个int, 那么它会把它作为一个状态码发送
 
-- 如果它是一个错误, 那么它将设置一个坏请求, 并将该错误作为其原因
+- 如果它是一个错误, 那么它将设置一个错误请求, 并将该错误作为其原因(返回)
 
 - 如果它是一个错误和一个整数, 那么错误代码是该整数, 而不是400(坏请求)
 
@@ -357,7 +357,7 @@ curl --request POST 'http://localhost:8080/users?firstname=John&lastname=Doe'
 
 - 如果它是一个自定义结构和一个字符串, 那么第二个输出值是string, 它将是Content-Type, 以此类推
 
-| 类型 | 回复 |
+| 类型 | 返回值 |
 | --- | --- |
 | string | body |
 | string, string | content-type, body |
@@ -370,8 +370,8 @@ curl --request POST 'http://localhost:8080/users?firstname=John&lastname=Doe'
 | <Τ>, string | body, content-type |
 | <Τ>, error | JSON body or bad request |
 | <Τ>, int | JSON body, status code |
-| [Result](https://godoc.org/github.com/kataras/iris/hero#Result) | calls its Dispatch method |
-| [PreflightResult](https://godoc.org/github.com/kataras/iris/hero#PreflightResult) | calls its Preflight method |
+| [Result](https://godoc.org/github.com/kataras/iris/hero#Result) | 调用它的 `Dispatch` 方法 |
+| [PreflightResult](https://godoc.org/github.com/kataras/iris/hero#PreflightResult) | 调用它的 `Preflight` 方法 |
 
 `<T>` 代表任意结构体的值
 
@@ -402,4 +402,4 @@ func deleteUser(db *sql.DB, id uint64) *response {
 }
 ```
 
-稍后, 您将看到这些知识怎样帮助您使用MVC架构模式(Iris为它提供了超棒的API)构建应用
+稍后, 您将知晓这些知识是如何帮助您, 使用Iris为它提供了超棒API的MVC架构模式来构建应用

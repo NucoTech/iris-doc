@@ -1,15 +1,13 @@
-# 会话数据库(Sessions Dayabase)
+# 会话数据库(Sessions Database)
 
 有时, 您需要一个后端存储, 比如redis, 它会在服务器重启时保存你的会话数据并横向扩展
 
-注册会话数据库可以通过一次 `session.UseDatabase (database)` 调用来完成
+注册会话数据库可以单次调用 `session.UseDatabase (database)` 来完成
 
 Iris为[redis](https://redis.io/)、[badger](https://github.com/dgraph-io/badger)和[boltdb](https://github.com/kataras/iris/wiki/github.com/etcd-io/bbolt)实现了内置会话数据库。您需要导入[iris/sessions/sessiondb](https://github.com/kataras/iris/tree/master/sessions/sessiondb)子包实现
 
-1. 导入gitbub.com/kataras/iris/sessions/sessiondb/redis或boltdb或badger
-
+1. 导入 `gitbub.com/kataras/iris/sessions/sessiondb/redis或boltdb或badger`
 2. 初始化数据库
-
 3. 注册
 
 例如, 注册redis会话数据库:
@@ -24,7 +22,7 @@ import (
 )
 
 // 2. 初始化数据库
-// 这些是默认值, 您可以根据您正在运行的redis数据库进行修改
+// 这些是默认值, 您可以根据正在运行的redis数据库进行修改
 db := redis.New(redis.Config{
     Network:   "tcp",
     Addr:      "127.0.0.1:6379",
@@ -37,7 +35,7 @@ db := redis.New(redis.Config{
     Driver:    redis.Redigo(), // 可用redis.Radix()代替 
 })
 
-// 可以选择配置标注驱动程序
+// 可以通过选项的方式来配置驱动器
 // driver := redis.Redigo()
 // driver.MaxIdle = ...
 // driver.IdleTimeout = ...
