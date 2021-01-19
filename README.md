@@ -51,6 +51,10 @@ Iris框架Wiki翻译文档
   - [支持](/Resources/Support.md)
   - [示例](https://github.com/kataras/iris/tree/master/_examples)
 
+## Contribution
+
+文档内容建设, 请遵守[文档内容建设指南](https://github.com/NucoTech/iris-doc/blob/main/CONTRIBUTING.md)
+
 ## Contributors
 
 - [Herbert He](https://github.com/HerbertHe)
