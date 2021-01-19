@@ -53,7 +53,7 @@ Iris框架Wiki翻译文档
 
 ## Contribution
 
-文档内容建设, 请遵守[文档内容建设指南](https://github.com/NucoTech/iris-doc/blob/main/CONTRIBUTING.md)
+文档内容建设, 请遵守[文档建设指南](https://github.com/NucoTech/iris-doc/blob/main/CONTRIBUTING.md)
 
 ## Contributors
 
