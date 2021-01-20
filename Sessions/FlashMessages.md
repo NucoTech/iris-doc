@@ -8,6 +8,9 @@
 import "github.com/kataras/iris/v12/sessions"
 
 sess := sessions.New(sessions.Config{Cookie: "cookieName", ...})
+```
+
+```go
 // [app := iris.New...]
 
 app.Get("/path", func(ctx iris.Context) {
