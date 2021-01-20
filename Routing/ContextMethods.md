@@ -1,6 +1,6 @@
 # 上下文方法(All context Methods)
 
-这里有 `iris.context` 提供的所有方法的列表
+这里完整列出了 `iris.Context` 提供的方法
 
 ```go
 type Context interface {
@@ -9,7 +9,7 @@ type Context interface {
     //  "h" 会先于 `FireErrorCode` 执行(当请求状态码为不成功时).
     Defer(Handler)
 
-    // ResponseWriter会如预期返回一个http.ResponseWriter兼容的响应写入器
+    // ResponseWriter会如预期返回一个http.ResponseWriter兼容的响应写入器(response writer)
     ResponseWriter() ResponseWriter
     // ResetResponseWriter应更改或更新上下文的响应写入器
     ResetResponseWriter(ResponseWriter)

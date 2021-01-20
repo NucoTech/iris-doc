@@ -16,18 +16,18 @@ Iris有自己的会话实现, 会话管理器位于[iris/sessions](https://githu
 
 <details>
     <summary>来看看怎么写</summary>
-     会话管理器是使用 `New` 包级函数创建的
 
-<pre><code>
+会话管理器是使用 `New` 包级函数创建的
+
+```go
     import "github.com/kataras/iris/v12/sessions"
-
     sess := sessions.New(sessions.Config{Cookie: "cookieName", ...})
-</code></pre>
+```
 
-    `Config` 看起来像这样
+`Config` 看起来像这样
 
-<pre><code>
-    ``SessionIDGenerator func(iris.Context) string
+```go
+    SessionIDGenerator func(iris.Context) string
 
     // 默认为 "irissessionid".
     Cookie string
@@ -48,12 +48,12 @@ Iris有自己的会话实现, 会话管理器位于[iris/sessions](https://githu
     Expires time.Duration
 
     // 默认为 false
-    DisableSubdomainPersistence bool``
-</code></pre>
+    DisableSubdomainPersistence bool
+```
 
-    返回值是一个会话指针, 导出以下的方法
+返回值是一个会话指针, 导出以下的方法
 
-<pre><code>
+```go
     Start(ctx iris.Context,
     cookieOptions ...iris.CookieOption) *Session
 
@@ -70,13 +70,13 @@ Iris有自己的会话实现, 会话管理器位于[iris/sessions](https://githu
         cookieOptions ...iris.CookieOption) error
 
     UseDatabase(db Database)
-</code></pre>
+```
 
-    其中 `CookieOption` 只是一个 `func(*http.Cookie)` , 它允许自定义cookie的属性
+其中 `CookieOption` 只是一个 `func(*http.Cookie)` , 它允许自定义cookie的属性
 
-    `Start` 方法返回一个会话指针值, 该值导出自己的方法用于每个会话
+`Start` 方法返回一个会话指针值, 该值导出自己的方法用于每个会话
 
-<pre><code>
+```go
     func (ctx iris.Context) {
         session := sess.Start(ctx)
         .ID() string
@@ -119,7 +119,8 @@ Iris有自己的会话实现, 会话管理器位于[iris/sessions](https://githu
 
         .Destroy()
     }
-  </code></pre>
+```
+
 </details>
 
 ## 例子
