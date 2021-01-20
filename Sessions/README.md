@@ -15,61 +15,61 @@ Iris有自己的会话实现, 会话管理器位于[iris/sessions](https://githu
 会话变量和 `Session.Set` 方法一起设置, 并且通过 `Session.Get` 及相关方法检索。想要删除单个变量需要使用 `Session.Delete`,而删除或取消整个会话则需要 `Session.Destroy` 方法
 
 <details>
-    <summary>来看看怎么写</summary>
+<summary>来看看怎么写</summary>
 
 会话管理器是使用 `New` 包级函数创建的
 
 ```go
-    import "github.com/kataras/iris/v12/sessions"
-    sess := sessions.New(sessions.Config{Cookie: "cookieName", ...})
+import "github.com/kataras/iris/v12/sessions"
+sess := sessions.New(sessions.Config{Cookie: "cookieName", ...})
 ```
 
 `Config` 看起来像这样
 
 ```go
-    SessionIDGenerator func(iris.Context) string
+SessionIDGenerator func(iris.Context) string
 
-    // 默认为 "irissessionid".
-    Cookie string
+// 默认为 "irissessionid".
+Cookie string
 
-    CookieSecureTLS bool
+CookieSecureTLS bool
 
-    // 默认为 false.
-    AllowReclaim bool
+// 默认为 false.
+AllowReclaim bool
 
-    // 默认为 nil.
-    Encode func(cookieName string, value interface{}) (string, error)
-    // 默认为 nil.
-    Decode func(cookieName string, cookieValue string, v interface{}) error
-    // 默认为 nil.
-    Encoding Encoding
+// 默认为 nil.
+Encode func(cookieName string, value interface{}) (string, error)
+// 默认为 nil.
+Decode func(cookieName string, cookieValue string, v interface{}) error
+// 默认为 nil.
+Encoding Encoding
 
-    // 默认为 infinitive/unlimited life duration(0)
-    Expires time.Duration
+// 默认为 infinitive/unlimited life duration(0)
+Expires time.Duration
 
-    // 默认为 false
-    DisableSubdomainPersistence bool
+// 默认为 false
+DisableSubdomainPersistence bool
 ```
 
 返回值是一个会话指针, 导出以下的方法
 
 ```go
-    Start(ctx iris.Context,
-    cookieOptions ...iris.CookieOption) *Session
+Start(ctx iris.Context,
+cookieOptions ...iris.CookieOption) *Session
 
-    Handler(cookieOptions ...iris.CookieOption) iris.Handler
+Handler(cookieOptions ...iris.CookieOption) iris.Handler
 
-    Destroy()
-    DestroyAll()
-    DestroyByID(sessID string)
-    OnDestroy(callback func(sid string))
+Destroy()
+DestroyAll()
+DestroyByID(sessID string)
+OnDestroy(callback func(sid string))
 
-    ShiftExpiration(ctx iris.Context,
-        cookieOptions ...iris.CookieOption) error
-    UpdateExpiration(ctx iris.Context, expires time.Duration,
-        cookieOptions ...iris.CookieOption) error
+ShiftExpiration(ctx iris.Context,
+    cookieOptions ...iris.CookieOption) error
+UpdateExpiration(ctx iris.Context, expires time.Duration,
+    cookieOptions ...iris.CookieOption) error
 
-    UseDatabase(db Database)
+UseDatabase(db Database)
 ```
 
 其中 `CookieOption` 只是一个 `func(*http.Cookie)` , 它允许自定义cookie的属性
@@ -77,48 +77,48 @@ Iris有自己的会话实现, 会话管理器位于[iris/sessions](https://githu
 `Start` 方法返回一个会话指针值, 该值导出自己的方法用于每个会话
 
 ```go
-    func (ctx iris.Context) {
-        session := sess.Start(ctx)
-        .ID() string
-        .IsNew() bool
+func (ctx iris.Context) {
+    session := sess.Start(ctx)
+    .ID() string
+    .IsNew() bool
 
-        .Set(key string, value interface{})
-        .SetImmutable(key string, value interface{})
-        .GetAll() map[string]interface{}
-        .Len() int
-        .Delete(key string) bool
-        .Clear()
+    .Set(key string, value interface{})
+    .SetImmutable(key string, value interface{})
+    .GetAll() map[string]interface{}
+    .Len() int
+    .Delete(key string) bool
+    .Clear()
 
-        .Get(key string) interface{}
-        .GetString(key string) string
-        .GetStringDefault(key string, defaultValue string) string
-        .GetInt(key string) (int, error)
-        .GetIntDefault(key string, defaultValue int) int
-        .Increment(key string, n int) (newValue int)
-        .Decrement(key string, n int) (newValue int)
-        .GetInt64(key string) (int64, error)
-        .GetInt64Default(key string, defaultValue int64) int64
-        .GetFloat32(key string) (float32, error)
-        .GetFloat32Default(key string, defaultValue float32) float32
-        .GetFloat64(key string) (float64, error)
-        .GetFloat64Default(key string, defaultValue float64) float64
-        .GetBoolean(key string) (bool, error)
-        .GetBooleanDefault(key string, defaultValue bool) bool
+    .Get(key string) interface{}
+    .GetString(key string) string
+    .GetStringDefault(key string, defaultValue string) string
+    .GetInt(key string) (int, error)
+    .GetIntDefault(key string, defaultValue int) int
+    .Increment(key string, n int) (newValue int)
+    .Decrement(key string, n int) (newValue int)
+    .GetInt64(key string) (int64, error)
+    .GetInt64Default(key string, defaultValue int64) int64
+    .GetFloat32(key string) (float32, error)
+    .GetFloat32Default(key string, defaultValue float32) float32
+    .GetFloat64(key string) (float64, error)
+    .GetFloat64Default(key string, defaultValue float64) float64
+    .GetBoolean(key string) (bool, error)
+    .GetBooleanDefault(key string, defaultValue bool) bool
 
-        .SetFlash(key string, value interface{})
-        .HasFlash() bool
-        .GetFlashes() map[string]interface{}
+    .SetFlash(key string, value interface{})
+    .HasFlash() bool
+    .GetFlashes() map[string]interface{}
 
-        .PeekFlash(key string) interface{}
-        .GetFlash(key string) interface{}
-        .GetFlashString(key string) string
-        .GetFlashStringDefault(key string, defaultValue string) string
+    .PeekFlash(key string) interface{}
+    .GetFlash(key string) interface{}
+    .GetFlashString(key string) string
+    .GetFlashStringDefault(key string, defaultValue string) string
 
-        .DeleteFlash(key string)
-        .ClearFlashes()
+    .DeleteFlash(key string)
+    .ClearFlashes()
 
-        .Destroy()
-    }
+    .Destroy()
+}
 ```
 
 </details>
