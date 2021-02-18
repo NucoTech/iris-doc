@@ -139,7 +139,7 @@ func fireProblem(ctx iris.Context) {
 }
 ```
 
-当 `RenderXML` 设置为 `true` 时，响应将看起来是作为 XML 呈现的
+当 `RenderXML` 设置为 `true` 时, 响应将看起来是作为 XML 呈现的
 
 ## 输出"application/problem+xml"
 
