@@ -1,4 +1,4 @@
-# 逆向查找(Routing reverse lookups)
+# 逆向查找 (Routing reverse lookups)
 
 ## 逆向查找
 

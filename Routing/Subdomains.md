@@ -1,4 +1,4 @@
-# 子路由(Routing subdomains)
+# 子路由 (Routing subdomains)
 
 Iris为单个应用程序提供了已知的最简单的子域名注册形式。当然, 您可以使用nginx或caddy进行生产管理
 

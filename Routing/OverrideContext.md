@@ -1,6 +1,6 @@
 # 路由覆盖上下文(Routing override context)
 
-在本节中, 您将学习如何覆盖现有[上下文](https://godoc.org/github.com/kataras/iris/context#Context)的方法
+在本节中, 您将学习如何覆盖现有 [上下文](https://godoc.org/github.com/kataras/iris/context#Context)的方法
 
 上下文是一个接口。然而, 你可能知道, 当您使用其他框架时, 您没有覆盖的功能, 即使它被用作一个接口。使用Iris, 您可以使用 `app.ContextPool.Attach` 方法来实现**附加**到**上下文池**本身
 
